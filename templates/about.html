@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>About Page</h2>
+    
+    <h2>{{ page_title }}</h2>
     <p>
         The formation of the group grew out of a meeting Gandalf had with Thorin in Bree which kindled Thorin's interest in
         recapturing his long lost family inheritance. (Thorin's grandfather had been the King under the Mountain when Smaug
@@ -10,34 +11,42 @@
         superstitious Dwarves also considered thirteen to be an unlucky number, and as Gandalf had planned to leave on other
         business, welcomed a fourteenth to fill into their party.
     </p>
+    {% for member in company %}
+
+        <div class="row featurette">
+
+            {% if loop.index % 2 != 0 %}
+
+                <div class="col-md-7">
+                    <h3><a href="/about/{{ member_url }}">{{ loop.index }}. {{ member.name }}</a></h3>
+                    <p>
+                        {{ member.description }}
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ member.image_source}}" alt="" class="featurette-image image-responsive">
+                </div>
+            
+            {% else %}
+
+                <div class="col-md-5">
+                    <img src="{{ member.image_source}}" alt="" class="featurette-image image-responsive">
+                </div>
+                <div class="col-md-7">
+                    <h3><a href="/about/{{ member_url }}">{{ loop.index }}. {{ member.name }}</a></h3>
+                    <p>
+                        {{ member.description }}
+                    </p>
+                </div>
+
+            {% endif %}
+        </div>
+        {% if loop.index != loop.lenght %} 
+
+            <hr class="featurette-divider">
+
+        {% endif %}
+
+    {% endfor %}
     
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h3>Thorin Oakenshield</h3>
-            <p>
-                Thorin II "Oakenshield", eventually called King under the Mountain or Mountain King[1], was the son of Thráin II,
-                the older brother of Frerin and Dís, the grandson of King Thrór and the uncle of Fíli and Kíli. Thorin was best
-                known for his deeds as leader of a company that infiltrated the lost Kingdom under the Mountain to take it back from
-                Smaug and for leading an alliance of Men, Dwarves, and Elves in the Battle of Five Armies.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <img src="https://vignette.wikia.nocookie.net/lotr/images/3/3f/ThorinBIG.jpg" alt="">
-        </div>
-    </div>
-    <div class="row featurette">
-        <div class="col-md-5">
-            <img src="https://vignette.wikia.nocookie.net/lotr/images/b/b4/The-Hobbit-Fili-and-Kili.jpg" alt="">
-        </div>
-        <div class="col-md-7">
-            <h3>Fili and Kili</h3>
-            <p>
-                The deeds of Thorin and Company led to the restoration of the Dwarven Kingdom of the Lonely Mountain and the kingdom
-                of Dale, the rebuilding of Lake-town, and restoration of peace and prosperity in the immediate area for many years.
-                In the long term, the journey of Thorin and Company and the situations it created led to the Council of Elrond and
-                the formation of the Fellowship of the Ring many years later and played a major part setting in motion in the events
-                of the War of the Ring.
-            </p>
-        </div>
-    </div>
 {% endblock %}
